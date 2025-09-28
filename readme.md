@@ -46,7 +46,7 @@ This project demonstrates the basic concepts of Convolutional Neural Networks (C
 
 ```
 .
-├── cnn_demo.py
+├── max_pooling.py
 ├── requirements.txt
 └── readme.md
 ```
