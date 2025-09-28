@@ -37,7 +37,7 @@ This project demonstrates the basic concepts of Convolutional Neural Networks (C
 
 1. Run the main demo script:
     ```bash
-    python cnn_demo.py
+    python max_pooling.py
     ```
 
 2. Follow the on-screen instructions and view the visualizations.
