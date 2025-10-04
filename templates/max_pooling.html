@@ -14,31 +14,117 @@
         <a href="/max_pooling" class="nav-link" style="color: greenyellow;">Max Pooling</a>
         <a href="/min_pooling" class="nav-link">Min Pooling</a>
     </div>
-    <form method="POST" action="/max_pooling">
+    <form method="POST" action="/max_pooling" enctype="multipart/form-data">
         <div class="container">
             <h2>Max Pooling</h2>
             <p>Max pooling is a downsampling technique used in Convolutional Neural Networks (CNNs) to reduce the spatial dimensions of feature maps while retaining the most important information. It works by dividing the input into non-overlapping rectangular regions and selecting the maximum value from each region.</p>
-            <h3>Example:</h3>
-            <div class="image-container">
+        <!-- Drag & Drop File Upload Area -->
+        <div class="upload-area" id="upload-area">
+            <p>Drag & drop your image here or click to browse</p>
+            <input type="file" name="image" id="fileInput" accept="image/*" hidden>
+        </div>
+
+        <!-- Previews after image is uploaded -->
+        <div id="preview"></div>
+
+        <!-- Max Pooling Iterations Selection -->
+        <div class="iterations-container">
+            <label for="iterations">Number of Max Pooling Iterations (1-5):</label>
+            <input type="number" id="iterations" name="iterations" min="1" max="5" value="1" class="iterations-input">
+        </div>
+
+        <button type="submit" class="button">Apply Max Pooling</button>
+
+        <!-- Results display when image is processed -->
+        {% if uploaded %}
+        <div class="results-container">
+            <h3>Results:</h3>
+            <div class="iterations-grid">
                 <div class="image-box">
                     <h4>Original Image</h4>
-                    <img src="/static/images/naruto.png" alt="Original Image" class="image">
+                    <img src="{{ url_for('static', filename=original_image) }}" alt="Original Image" class="image">
                 </div>
+                {% for i in range(iterations) %}
                 <div class="image-box">
-                    <h4>Max Pooled Image 1(Colored)</h4>
-                    <img src="/static/images/max_pooled_flask_color.png" alt="Max Pooled Colored Image 1" class="image">
+                    <h4>Max Pooled {{ i + 1 }}</h4>
+                    <img src="{{ url_for('static', filename=processed_images[i]) }}" alt="Max Pooled {{ i + 1 }}" class="image">
                 </div>
-                <div class="image-box">
-                    <h4>Max Pooled Image 2(Colored)</h4>
-                    <img src="/static/images/max_pooled_flask_color_2.png" alt="Max Pooled Colored Image 2" class="image">
-                </div>
-                <div class="image-box">
-                    <h4>Max Pooled Image 3(Colored)</h4>
-                    <img src="/static/images/max_pooled_flask_color_3.png" alt="Max Pooled Colored Image 3" class="image">
-                </div>
+                {% endfor %}
             </div>
-            <button type="submit" class="button">Apply Max Pooling</button>
+        </div>
+        {% endif %}
+
+        <h3>Example:</h3>
+        <div class="image-container">
+            <!-- Existing image previews -->
+            <div class="image-box">
+                <h4>Original Image</h4>
+                <img src="/static/images/naruto.png" alt="Original Image" class="image">
+            </div>
+            <div class="image-box">
+                <h4>Max Pooled Image 1 (Colored)</h4>
+                <img src="/static/images/max_pooled_flask_color.png" alt="Max Pooled Colored Image 1" class="image">
+            </div>
+            <div class="image-box">
+                <h4>Max Pooled Image 2 (Colored)</h4>
+                <img src="/static/images/max_pooled_flask_color_2.png" alt="Max Pooled Colored Image 2" class="image">
+            </div>
+            <div class="image-box">
+                <h4>Max Pooled Image 3 (Colored)</h4>
+                <img src="/static/images/max_pooled_flask_color_3.png" alt="Max Pooled Colored Image 3" class="image">
+            </div>
+        </div>
         </div>
     </form>
+    <footer class="footer">
+        &copy; 2025 S A Herdev Anish. All rights reserved.
+    </footer>
 </body>
+<script>
+    const uploadArea = document.getElementById('upload-area');
+    const fileInput = document.getElementById('fileInput');
+    const preview = document.getElementById('preview');
+
+    uploadArea.addEventListener('click', () => {
+        fileInput.click();
+    });
+
+    uploadArea.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        uploadArea.classList.add('dragover');
+    });
+
+    uploadArea.addEventListener('dragleave', () => {
+        uploadArea.classList.remove('dragover');
+    });
+
+    uploadArea.addEventListener('drop', (e) => {
+        e.preventDefault();
+        uploadArea.classList.remove('dragover');
+        const droppedFiles = e.dataTransfer.files;
+
+        if (droppedFiles.length > 0) {
+            // Create a new DataTransfer object (only works in modern browsers)
+            const dataTransfer = new DataTransfer();
+            dataTransfer.items.add(droppedFiles[0]);
+            fileInput.files = dataTransfer.files; 
+            showPreview(droppedFiles[0]);
+        }
+    });
+
+    fileInput.addEventListener('change', () => {
+        if (fileInput.files.length > 0) {
+            showPreview(fileInput.files[0]);
+        }
+    });
+
+    function showPreview(file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            preview.innerHTML = `<img src="${e.target.result}" alt="Preview">`;
+        };
+        reader.readAsDataURL(file);
+    }
+</script>
+
 </html>
