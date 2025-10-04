@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CNN Demo</title>
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}"> -->
+    <link rel="stylesheet" href="/static/css/index.css">
+</head>
+<body>
+    <div class="top-bar">
+        <h1><a href="/" class="nav-link">CNN convolution and Pooling Demo</a></h1>
+        <a href="/convolution" class="nav-link">Convolution</a>
+        <a href="/max_pooling" class="nav-link" style="color: greenyellow;">Max Pooling</a>
+        <a href="/min_pooling" class="nav-link">Min Pooling</a>
+    </div>
+    <form method="POST" action="/max_pooling">
+        <div class="container">
+            <h2>Max Pooling</h2>
+            <p>Max pooling is a downsampling technique used in Convolutional Neural Networks (CNNs) to reduce the spatial dimensions of feature maps while retaining the most important information. It works by dividing the input into non-overlapping rectangular regions and selecting the maximum value from each region.</p>
+            <h3>Example:</h3>
+            <div class="image-container">
+                <div class="image-box">
+                    <h4>Original Image</h4>
+                    <img src="/static/images/naruto.png" alt="Original Image" class="image">
+                </div>
+                <div class="image-box">
+                    <h4>Max Pooled Image 1(Colored)</h4>
+                    <img src="/static/images/max_pooled_flask_color.png" alt="Max Pooled Colored Image 1" class="image">
+                </div>
+                <div class="image-box">
+                    <h4>Max Pooled Image 2(Colored)</h4>
+                    <img src="/static/images/max_pooled_flask_color_2.png" alt="Max Pooled Colored Image 2" class="image">
+                </div>
+                <div class="image-box">
+                    <h4>Max Pooled Image 3(Colored)</h4>
+                    <img src="/static/images/max_pooled_flask_color_3.png" alt="Max Pooled Colored Image 3" class="image">
+                </div>
+            </div>
+            <button type="submit" class="button">Apply Max Pooling</button>
+        </div>
+    </form>
+</body>
+</html>

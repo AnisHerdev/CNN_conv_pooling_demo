@@ -1,0 +1,73 @@
+.top-bar {
+    text-align: center;
+    background-color: rgb(46, 46, 46);
+    padding: 20px;
+    border-radius: 10px;
+    color: white;
+    margin:10px
+}
+body{
+    font-family: Helvetica, Arial, sans-serif;
+    background-color: #a0e4fd;
+    margin:0;
+    overflow-x: hidden;
+}
+.nav-link {
+    margin: 0 15px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+
+.nav-link:hover {
+    margin: 0 15px;
+    text-decoration: none;
+    color: greenyellow;
+    font-weight: bold;
+}
+
+footer {
+    width: 100%;
+    text-align: center;
+    padding: 0.5em;
+    background-color: rgb(4, 4, 4);
+    color: white;
+    position: fixed;
+    bottom: 0;
+    opacity: 0.8;
+    font-weight: bold;
+    left: 0;
+    margin: 0;
+    bottom: 0;
+}
+
+
+.container {
+    /* Centers the content and provides side-padding on small screens */
+    width: 95%;
+    max-width: 1200px; /* Prevents it from getting too wide */
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+
+.image-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: flex-start;
+    gap: 20px; /* space between images */
+    margin-top: 10px;
+}
+
+.image-box {
+    text-align: left;
+}
+
+.image {
+    max-width: 300px;
+    height: auto;
+    display: block;
+}

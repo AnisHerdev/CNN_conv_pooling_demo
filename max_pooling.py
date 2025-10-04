@@ -49,6 +49,11 @@ def min_pooling(img_array,filter_width=2,filter_height=2,stride=1):
             pooled_array[i,j]= segment.min()
     return pooled_array
 
+def save_image(img_array,name="max_pooled_image.png"):
+    pooled_array_uint8 = img_array.astype(np.uint8)  # Convert to 8-bit unsigned int
+    pooled_img = Image.fromarray(pooled_array_uint8)
+    pooled_img.save(name)
+
 
 if __name__ == "__main__":
     layers = 5
@@ -65,7 +70,7 @@ if __name__ == "__main__":
     # pooled_img.save("max_pooled.png")
     for i in range(layers):
         pooled_array = max_pooling_black_and_white(img_array,2,2,2)
-        pooled_array_uint8 = pooled_array.astype(np.uint8)  # Convert to 8-bit unsigned int
+        pooled_array_uint8 = img_array.astype(np.uint8)  # Convert to 8-bit unsigned int
         pooled_img = Image.fromarray(pooled_array_uint8)
         pooled_img.save(f"max_pooled_{i}_bw.png")
         img_array = pooled_array
